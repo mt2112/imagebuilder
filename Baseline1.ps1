@@ -3294,9 +3294,9 @@ if ($NewLocalAdminExists.Count -eq 0) {
         Write-Info "Your password must contain at least 15 characters, capital letters, numbers and symbols"
         
         Write-Info "Please enter the new password:"
-        $temp_pass1 = "do0DE5yy~43z8c8@l|!s"
+        $temp_pass1 = "Password1234!#!#!"
         Write-Info "Please repeat the new password:"
-        $temp_pass2 = "do0DE5yy~43z8c8@l|!s" 
+        $temp_pass2 = "Password1234!#!#!" 
         
         $invalid_pass = ValidatePasswords $temp_pass1 $temp_pass2 
         if($invalid_pass -eq $false) {
