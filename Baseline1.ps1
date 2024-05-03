@@ -99,7 +99,7 @@ $ExecutionList = @(
     "CreateSymbolicLinks",                                              #2.2.18
     "DebugPrograms",                                                    #2.2.19
     #2.2.20 Not Applicable to Member Server
-    "DenyNetworkAccess",                                                #2.2.21
+    #"DenyNetworkAccess",                                                #2.2.21
     "DenyGuestBatchLogon",                                              #2.2.22
     "DenyGuestServiceLogon",                                            #2.2.23
     "DenyGuestLocalLogon",                                              #2.2.24
@@ -126,9 +126,9 @@ $ExecutionList = @(
     "RestoreFilesDirectories",                                          #2.2.45
     "SystemShutDown",                                                   #2.2.46
     #2.2.47 Not Applicable to Member Server
-    "TakeOwnershipFiles",                                               #2.2.48
-    "DisableAdministratorAccount",                                      #2.3.1.1
-    "DisableMicrosoftAccounts",                                         #2.3.1.2
+    #"TakeOwnershipFiles",                                               #2.2.48
+    #"DisableAdministratorAccount",                                      #2.3.1.1
+    #"DisableMicrosoftAccounts",                                         #2.3.1.2
     "DisableGuestAccount",                                              #2.3.1.3
     "LimitBlankPasswordConsole",                                        #2.3.1.4
     "AuditForceSubCategoryPolicy",                                      #2.3.2.1
@@ -467,14 +467,14 @@ $ExecutionList = @(
     "DisableAutomaticRestartSignOn",                                    #18.9.91.1 (2023.01.27 - added to default configuration, corrected reg value)
     "EnableScriptBlockLogging",                                         #18.9.100.1 (2023.01.27 - added to default configuration, corrected reg value)
     "EnableTranscripting",                                              #18.9.100.2 (2023.01.27 - added to default configuration)
-    "WinRMClientAllowBasic",                                            #18.9.102.1.1 (2023.01.27 - added to default configuration)
-    "WinRMClientAllowUnencryptedTraffic",                               #18.9.102.1.2 (2023.01.30 - added support)
-    "WinRMClientAllowDigest",                                           #18.9.102.1.3 (2023.01.27 - added to default configuration, corrected reg value)
-    "WinRMServiceAllowBasic",                                           #18.9.102.2.1 (2023.01.27 - added to default configuration)
-    "WinRMServiceAllowAutoConfig",                                      #18.9.102.2.2 (2023.01.27 - added to default configuration)
-    "WinRMServiceAllowUnencryptedTraffic",                              #18.9.102.2.3 (2023.01.27 - added to default configuration)
-    "WinRMServiceDisableRunAs",                                         #18.9.102.2.4 (2023.01.27 - added to default configuration)
-    "WinRSAllowRemoteShellAccess",                                      #18.9.103.1 (2023.01.27 - added to default configuration)
+    #"WinRMClientAllowBasic",                                            #18.9.102.1.1 (2023.01.27 - added to default configuration)
+    #"WinRMClientAllowUnencryptedTraffic",                               #18.9.102.1.2 (2023.01.30 - added support)
+    #"WinRMClientAllowDigest",                                           #18.9.102.1.3 (2023.01.27 - added to default configuration, corrected reg value)
+    #"WinRMServiceAllowBasic",                                           #18.9.102.2.1 (2023.01.27 - added to default configuration)
+    #"WinRMServiceAllowAutoConfig",                                      #18.9.102.2.2 (2023.01.27 - added to default configuration)
+    #"WinRMServiceAllowUnencryptedTraffic",                              #18.9.102.2.3 (2023.01.27 - added to default configuration)
+    #"WinRMServiceDisableRunAs",                                         #18.9.102.2.4 (2023.01.27 - added to default configuration)
+    #"WinRSAllowRemoteShellAccess",                                      #18.9.103.1 (2023.01.27 - added to default configuration)
     "DisallowExploitProtectionOverride",                                #18.9.105.2.1 (2023.01.27 - added to default configuration)
     "NoAutoRebootWithLoggedOnUsers",                                    #18.9.108.1.1 (2023.01.27 - added to default configuration)
     "ConfigureAutomaticUpdates",                                        #18.9.108.2.1 (2023.01.27 - added to default configuration)
