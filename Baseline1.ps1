@@ -10,9 +10,9 @@ $WindowsFirewallLogSize = 4*1024*1024 # Default for script is 4GB
 $EventLogMaxFileSize = 4*1024*1024 # Default 4GB (for each log)
 $WindowsDefenderLogSize = 1024MB
 
-$AdminAccountPrefix = "DisabledUser" # Built-in admin account prefix. Numbers will be added to the end so that the built in admin account will be different on each server (account will be disabled after renaming)
+#$AdminAccountPrefix = "DisabledUser" # Built-in admin account prefix. Numbers will be added to the end so that the built in admin account will be different on each server (account will be disabled after renaming)
 $GuestAccountPrefix = "DisabledUser" # Build-in guest account prefix. Numbers will be added to the end so that the built in admin account will be different on each server (account will be disabled after renaming)
-$NewLocalAdmin = "User" # Active admin account username (Local admin account that will be used to manage the server. Account will be active after script is run. This is not a prefix. It's the full account username)
+#$NewLocalAdmin = "User" # Active admin account username (Local admin account that will be used to manage the server. Account will be active after script is run. This is not a prefix. It's the full account username)
 
 #########################################################
 # Compatibility Assurance 
@@ -36,7 +36,7 @@ $AttackSurfaceReductionExclusions = @(
     "C:\Program Files\RMM"
     
     # File Example
-    #"C:\some\folder\some.exe"
+    "C:\some\folder\some.exe"
 )
 
 #########################################################
@@ -64,13 +64,13 @@ $ExecutionList = @(
     "CreateASRExclusions"                                               # This deletes and readds the attack surface reduction exclusions configured in the script.
     "SetWindowsDefenderLogSize"                                         # Sets the defender log size as configured in the top of this script
     #KEEP THESE IN THE BEGINING
-    "CreateNewLocalAdminAccount",                                       #Mandatory otherwise the system access is lost
-    "RenameAdministratorAccount",                                       #2.3.1.5 
-    "RenameGuestAccount",                                               #2.3.1.6
+#    "CreateNewLocalAdminAccount",                                       #Mandatory otherwise the system access is lost  #IMPORTANT! Adjusted by Michał Chruściel to meet internal DWF requirements. #1.1.2
+#    "RenameAdministratorAccount",                                       #2.3.1.5 #IMPORTANT! Adjusted by Michał Chruściel to meet internal DWF requirements. #1.1.2
+    "RenameGuestAccount",                                               #2.3.1.6 #IMPORTANT! Adjusted by Michał Chruściel to meet internal DWF requirements. #1.1.2
     ###########################
     #"ResetSec",                                                        # Uncomment to reset the "Local Security Policy" (this doesn't touch the registry settings that are not in the Local Security Policy)
     "EnforcePasswordHistory",                                           #1.1.1
-    "MaximumPasswordAge",                                               #1.1.2
+    #"MaximumPasswordAge",                                               #IMPORTANT! Adjusted by Michał Chruściel to meet internal DWF requirements. #1.1.2
     "MinimumPasswordAge",                                               #1.1.3
     "MinimumPasswordLength",                                            #1.1.4
     "WindowsPasswordComplexityPolicyMustBeEnabled",                     #1.1.5
@@ -99,7 +99,7 @@ $ExecutionList = @(
     "CreateSymbolicLinks",                                              #2.2.18
     "DebugPrograms",                                                    #2.2.19
     #2.2.20 Not Applicable to Member Server
-    #"DenyNetworkAccess",                                                #2.2.21
+    "DenyNetworkAccess",                                                #2.2.21
     "DenyGuestBatchLogon",                                              #2.2.22
     "DenyGuestServiceLogon",                                            #2.2.23
     "DenyGuestLocalLogon",                                              #2.2.24
@@ -126,9 +126,9 @@ $ExecutionList = @(
     "RestoreFilesDirectories",                                          #2.2.45
     "SystemShutDown",                                                   #2.2.46
     #2.2.47 Not Applicable to Member Server
-    #"TakeOwnershipFiles",                                               #2.2.48
-    #"DisableAdministratorAccount",                                      #2.3.1.1
-    #"DisableMicrosoftAccounts",                                         #2.3.1.2
+    "TakeOwnershipFiles",                                               #2.2.48
+#    "DisableAdministratorAccount",                                      #2.3.1.1 #IMPORTANT! Adjusted by Michał Chruściel to meet internal DWF requirements. #1.1.2
+    "DisableMicrosoftAccounts",                                         #2.3.1.2
     "DisableGuestAccount",                                              #2.3.1.3
     "LimitBlankPasswordConsole",                                        #2.3.1.4
     "AuditForceSubCategoryPolicy",                                      #2.3.2.1
@@ -144,11 +144,11 @@ $ExecutionList = @(
     "SecureChannelWhenPossible",                                        #2.3.6.2
     "DigitallySignChannelWhenPossible",                                 #2.3.6.3
     "EnableAccountPasswordChanges",                                     #2.3.6.4
-    "MaximumAccountPasswordAge",                                        #2.3.6.5
+    #"MaximumAccountPasswordAge",                                        #IMPORTANT! Adjusted by Michał Chruściel to meet internal DWF requirements. #2.3.6.5
     "RequireStrongSessionKey",                                          #2.3.6.6
-    "RequireCtlAltDel",                                                 #2.3.7.1
+    "RequireCtlAltDel",                                                 #IMPORTANT! Adjusted by Michał Chruściel to meet internal DWF requirements. #2.3.7.1
     "DontDisplayLastSigned",                                            #2.3.7.2
-    "MachineInactivityLimit",                                           #2.3.7.3
+    "MachineInactivityLimit",                                           #IMPORTANT! Adjusted by Michał Chruściel to meet internal DWF requirements. #2.3.7.3
     "LogonLegalNotice",                                                 #2.3.7.4
     "LogonLegalNoticeTitle",                                            #2.3.7.5
     "PreviousLogonCache",                                               #2.3.7.6
@@ -158,7 +158,7 @@ $ExecutionList = @(
     "NetworkClientSignCommunications",                                  #2.3.8.1
     "EnableSecuritySignature",                                          #2.3.8.2
     "DisableSmbUnencryptedPassword",                                    #2.3.8.3
-    "IdleTimeSuspendingSession",                                        #2.3.9.1
+    "IdleTimeSuspendingSession",                                        #IMPORTANT! Adjusted by Michał Chruściel to meet internal DWF requirements. #2.3.9.1
     "NetworkServerAlwaysDigitallySign",                                 #2.3.9.2
     "LanManSrvEnableSecuritySignature",                                 #2.3.9.3
     "LanManServerEnableForcedLogOff",                                   #2.3.9.4
@@ -280,7 +280,7 @@ $ExecutionList = @(
     "NoNameReleaseOnDemand",                                            #18.4.6
     "PerformRouterDiscovery",                                           #18.4.7
     "SafeDllSearchMode",                                                #18.4.8
-    "ScreenSaverGracePeriod",                                           #18.4.9
+    "ScreenSaverGracePeriod",                                           #IMPORTANT! Adjusted by Michał Chruściel to meet internal DWF requirements. #18.4.9
     "TcpMaxDataRetransmissionsV6",                                      #18.4.10
     "TcpMaxDataRetransmissions",                                        #18.4.11
     "SecurityWarningLevel",                                             #18.4.12
@@ -450,7 +450,7 @@ $ExecutionList = @(
     "TerminalServicesSecurityLayer",                                    #18.9.65.3.9.3 (2023.02.01 - added to default configuration)
     "TerminalServicesUserAuthentication",                               #18.9.65.3.9.4 (2023.01.27 - added to default configuration)
     "TerminalServicesMinEncryptionLevel",                               #18.9.65.3.9.5 (2023.01.27 - added to default configuration, corrected min level value)
-    "TerminalServicesMaxIdleTime",                                      #18.9.65.3.10.1 (2023.01.27 - added to default configuration)
+    "TerminalServicesMaxIdleTime",                                      #IMPORTANT! Adjusted by Michał Chruściel to meet internal DWF requirements. #18.9.65.3.10.1 (2023.01.27 - added to default configuration)
     "TerminalServicesMaxDisconnectionTime",                             #18.9.65.3.10.2 (2023.01.27 - added to default configuration)
     "TerminalServicesDeleteTempDirsOnExit",                             #18.9.65.3.11.1 (2023.01.27 - added to default configuration, corrected reg value)
     "TerminalServicesPerSessionTempDir",                                #18.9.65.3.11.2 (2023.01.27 - added to default configuration, corrected reg value)
@@ -467,14 +467,14 @@ $ExecutionList = @(
     "DisableAutomaticRestartSignOn",                                    #18.9.91.1 (2023.01.27 - added to default configuration, corrected reg value)
     "EnableScriptBlockLogging",                                         #18.9.100.1 (2023.01.27 - added to default configuration, corrected reg value)
     "EnableTranscripting",                                              #18.9.100.2 (2023.01.27 - added to default configuration)
-    #"WinRMClientAllowBasic",                                            #18.9.102.1.1 (2023.01.27 - added to default configuration)
-    #"WinRMClientAllowUnencryptedTraffic",                               #18.9.102.1.2 (2023.01.30 - added support)
-    #"WinRMClientAllowDigest",                                           #18.9.102.1.3 (2023.01.27 - added to default configuration, corrected reg value)
-    #"WinRMServiceAllowBasic",                                           #18.9.102.2.1 (2023.01.27 - added to default configuration)
-    #"WinRMServiceAllowAutoConfig",                                      #18.9.102.2.2 (2023.01.27 - added to default configuration)
-    #"WinRMServiceAllowUnencryptedTraffic",                              #18.9.102.2.3 (2023.01.27 - added to default configuration)
-    #"WinRMServiceDisableRunAs",                                         #18.9.102.2.4 (2023.01.27 - added to default configuration)
-    #"WinRSAllowRemoteShellAccess",                                      #18.9.103.1 (2023.01.27 - added to default configuration)
+    "WinRMClientAllowBasic",                                            #18.9.102.1.1 (2023.01.27 - added to default configuration)
+    "WinRMClientAllowUnencryptedTraffic",                               #18.9.102.1.2 (2023.01.30 - added support)
+    "WinRMClientAllowDigest",                                           #18.9.102.1.3 (2023.01.27 - added to default configuration, corrected reg value)
+    "WinRMServiceAllowBasic",                                           #18.9.102.2.1 (2023.01.27 - added to default configuration)
+    "WinRMServiceAllowAutoConfig",                                      #IMPORTANT! Adjusted by Michał Chruściel to meet internal DWF requirements #18.9.102.2.2 (2023.01.27 - added to default configuration)
+    "WinRMServiceAllowUnencryptedTraffic",                              #18.9.102.2.3 (2023.01.27 - added to default configuration)
+    "WinRMServiceDisableRunAs",                                         #18.9.102.2.4 (2023.01.27 - added to default configuration)
+    "WinRSAllowRemoteShellAccess",                                      #IMPORTANT! Adjusted by Michał Chruściel to meet internal DWF requirements. #18.9.103.1 (2023.01.27 - added to default configuration)
     "DisallowExploitProtectionOverride",                                #18.9.105.2.1 (2023.01.27 - added to default configuration)
     "NoAutoRebootWithLoggedOnUsers",                                    #18.9.108.1.1 (2023.01.27 - added to default configuration)
     "ConfigureAutomaticUpdates",                                        #18.9.108.2.1 (2023.01.27 - added to default configuration)
@@ -793,27 +793,27 @@ function SetWindowsDefenderLogSize {
     Set-LogProperties -LogDetails $log
 }
 
-function CreateUserAccount([string] $username, [securestring] $password, [bool] $isAdmin=$false) {
-    $NewLocalAdminExists = Get-LocalUser -Name $username -ErrorAction SilentlyContinue
-    if ($NewLocalAdminExists) {
-        Write-Red "Skipping creating new Administrator account"
-        Write-Red "- New Administrator account already exists: $($username)"
-    }
-    else {
-        New-LocalUser -Name $username -Password $password -Description "" -AccountNeverExpires -PasswordNeverExpires
-        Write-Info "New Administrator account created: $($username)."
-        if($isAdmin -eq $true) {
-            Add-LocalGroupMember -Group "Administrators" -Member $username
-            Write-Info "Administrator account $($username) is now member of the local Administrators group."
-        }
+#function CreateUserAccount([string] $username, [securestring] $password, [bool] $isAdmin=$false) {
+#    $NewLocalAdminExists = Get-LocalUser -Name $username -ErrorAction SilentlyContinue
+#    if ($NewLocalAdminExists) {
+#        Write-Red "Skipping creating new Administrator account"
+#        Write-Red "- New Administrator account already exists: $($username)"
+#    }
+#    else {
+#        New-LocalUser -Name $username -Password $password -Description "" -AccountNeverExpires -PasswordNeverExpires
+#        Write-Info "New Administrator account created: $($username)."
+#        if($isAdmin -eq $true) {
+#            Add-LocalGroupMember -Group "Administrators" -Member $username
+#            Write-Info "Administrator account $($username) is now member of the local Administrators group."
+#        }
+#
+#        $global:rebootRequired = $true
+#    }
+#}
 
-        $global:rebootRequired = $true
-    }
-}
-
-function CreateNewLocalAdminAccount {
-    CreateUserAccount $NewLocalAdmin $NewLocalAdminPassword $true
-}
+#function CreateNewLocalAdminAccount {
+#    CreateUserAccount $NewLocalAdmin $NewLocalAdminPassword $true
+#}
 
 function EnforcePasswordHistory
 {
@@ -825,16 +825,17 @@ function EnforcePasswordHistory
     net accounts /uniquepw:24
 }
 
-function MaximumPasswordAge
-{
+#function MaximumPasswordAge
+#{
+    #IMPORTANT! Adjusted by Michał Chruściel to meet internal DWF requirements. Changed to 0
     #1.1.2 => Computer Configuration\Policies\Windows Settings\Security Settings\Account Policies\Password Policy\Maximum password age
     #1.1.2 (L1) Ensure 'Maximum password age' is set to '365 or fewer days, but not 0'
-    Write-Info "1.1.2 (L1) Ensure 'Maximum password age' is set to '365 or fewer days, but not 0'"
-    Write-Before ("Before hardening: *******               ")
-    Write-Output ( net accounts | Select-String -SimpleMatch 'Maximum password age' )
-    Write-After ("After hardening: *******                   ")
-    net accounts /maxpwage:365
-}
+#    Write-Info "1.1.2 (L1) Ensure 'Maximum password age' is set to '365 or fewer days, but not 0'"
+#    Write-Before ("Before hardening: *******               ")
+#    Write-Output ( net accounts | Select-String -SimpleMatch 'Maximum password age' )
+#    Write-After ("After hardening: *******                   ")
+#    net accounts /maxpwage:0
+#}
 
 function MinimumPasswordAge
 {
@@ -1180,11 +1181,11 @@ function TakeOwnershipFiles {
     SetUserRight "SeTakeOwnershipPrivilege" (,$SID_ADMINISTRATORS)
 }
 
-function DisableAdministratorAccount {
-    #2.3.1.1 => Computer Configuration\Policies\Windows Settings\Security Settings\Local Policies\Security Options\Accounts: Administrator account status
-    Write-Info "2.3.1.1 (L1) Ensure 'Accounts: Administrator account status' is set to 'Disabled'"
-    SetSecurityPolicy "EnableAdminAccount" (,"0")
-}
+#function DisableAdministratorAccount {
+#    #2.3.1.1 => Computer Configuration\Policies\Windows Settings\Security Settings\Local Policies\Security Options\Accounts: Administrator account status
+#    Write-Info "2.3.1.1 (L1) Ensure 'Accounts: Administrator account status' is set to 'Disabled'"
+#    SetSecurityPolicy "EnableAdminAccount" (,"0")
+#}
 
 function DisableMicrosoftAccounts {
     #2.3.1.2 => Computer Configuration\Policies\Windows Settings\Security Settings\Local Policies\Security Options\Accounts: Block Microsoft accounts
@@ -1204,30 +1205,30 @@ function LimitBlankPasswordConsole {
     SetSecurityPolicy "MACHINE\System\CurrentControlSet\Control\Lsa\LimitBlankPasswordUse" (,"4,1")
 }
 
-function RenameAdministratorAccount {
-    #2.3.1.5 => Computer Configuration\Policies\Windows Settings\Security Settings\Local Policies\Security Options\Accounts: Rename administrator account
-    $CurrentAdminUser = (Get-CimInstance -ClassName Win32_UserAccount -Filter "LocalAccount = TRUE and SID like 'S-1-5-%-500'").Name
-    $CurrentAdminPrefix = $CurrentAdminUser.substring(0,($CurrentAdminUser.Length-4)) # Remove the random seed from the end
-
-    # If the current admin user prefix matches the configured admin user prefix, we should skip this section.
-    if ($CurrentAdminUser.Length -eq ($AdminAccountPrefix.Length + 4) -and 
-        $CurrentAdminPrefix -eq $AdminAccountPrefix
-    ) {
-        Write-Red "Skipping 2.3.1.5 (L1) Configure 'Accounts: Rename administrator account'"
-        Write-Red "- Administrator account already renamed: $($CurrentAdminUser)."
-
-        return
-    }
-
-    # Prefix doesn't match, continue renaming...
-    $seed = Get-Random -Minimum 1000 -Maximum 9999   #Randomize the new admin and guest accounts on each system. 4-digit random number.
-    $global:AdminNewAccountName = "$($AdminAccountPrefix)$($seed)"
-    
-    Write-Info "2.3.1.5 (L1) Configure 'Accounts: Rename administrator account'"
-    Write-Info "- Renamed to $($global:AdminNewAccountName)"
-    SetSecurityPolicy "NewAdministratorName" (,"`"$($global:AdminNewAccountName)`"")
-    Set-LocalUser -Name $global:AdminNewAccountName -Description ""
-}
+#function RenameAdministratorAccount {
+#    #2.3.1.5 => Computer Configuration\Policies\Windows Settings\Security Settings\Local Policies\Security Options\Accounts: Rename administrator account
+#    $CurrentAdminUser = (Get-CimInstance -ClassName Win32_UserAccount -Filter "LocalAccount = TRUE and SID like 'S-1-5-%-500'").Name
+#    $CurrentAdminPrefix = $CurrentAdminUser.substring(0,($CurrentAdminUser.Length-4)) # Remove the random seed from the end#
+#
+#    # If the current admin user prefix matches the configured admin user prefix, we should skip this section.
+#    if ($CurrentAdminUser.Length -eq ($AdminAccountPrefix.Length + 4) -and 
+#        $CurrentAdminPrefix -eq $AdminAccountPrefix
+#    ) {
+#        Write-Red "Skipping 2.3.1.5 (L1) Configure 'Accounts: Rename administrator account'"
+#        Write-Red "- Administrator account already renamed: $($CurrentAdminUser)."
+#
+#        return
+#    }
+#
+#    # Prefix doesn't match, continue renaming...
+#    $seed = Get-Random -Minimum 1000 -Maximum 9999   #Randomize the new admin and guest accounts on each system. 4-digit random number.
+#    $global:AdminNewAccountName = "$($AdminAccountPrefix)$($seed)"
+#    
+#    Write-Info "2.3.1.5 (L1) Configure 'Accounts: Rename administrator account'"
+#    Write-Info "- Renamed to $($global:AdminNewAccountName)"
+#    SetSecurityPolicy "NewAdministratorName" (,"`"$($global:AdminNewAccountName)`"")
+#    Set-LocalUser -Name $global:AdminNewAccountName -Description ""
+#}
 
 function RenameGuestAccount {
     #2.3.1.6 => Computer Configuration\Policies\Windows Settings\Security Settings\Local Policies\Security Options\Accounts: Rename guest account
@@ -1302,11 +1303,12 @@ function EnableAccountPasswordChanges {
     SetSecurityPolicy "MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters\DisablePasswordChange" (,"4,0")
 }
 
-function MaximumAccountPasswordAge {
+#function MaximumAccountPasswordAge {
+    #IMPORTANT! Adjusted by Michał Chruściel to meet internal DWF requirements.
     #2.3.6.5 => Computer Configuration\Policies\Windows Settings\Security Settings\Local Policies\Security Options\Domain member: Maximum machine account password age
-    Write-Info "2.3.6.5 (L1) Ensure 'Domain member: Maximum machine account password age' is set to '30 or fewer days, but not 0'"
-    SetSecurityPolicy "MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters\MaximumPasswordAge" (,"4,30")
-}
+#    Write-Info "2.3.6.5 (L1) Ensure 'Domain member: Maximum machine account password age' is set to '30 or fewer days, but not 0'"
+#    SetSecurityPolicy "MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters\MaximumPasswordAge" (,"4,0")
+#}
 
 function RequireStrongSessionKey {
     #2.3.6.6 => Computer Configuration\Policies\Windows Settings\Security Settings\Local Policies\Security Options\Domain member: Require strong (Windows 2000 or later) session key
@@ -1315,9 +1317,10 @@ function RequireStrongSessionKey {
 }
 
 function RequireCtlAltDel {
+    #IMPORTANT! Adjusted by Michał Chruściel to meet internal DWF requirements. Changed to 1
     #2.3.7.1 => Computer Configuration\Policies\Windows Settings\Security Settings\Local Policies\Security Options\Interactive logon: Do not require CTRL+ALT+DEL
     Write-Info "2.3.7.1 (L1) Ensure 'Interactive logon: Do not require CTRL+ALT+DEL' is set to 'Disabled'"
-    SetSecurityPolicy "MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\DisableCAD" (,"4,0")
+    SetSecurityPolicy "MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\DisableCAD" (,"4,1")
 }
 
 function DontDisplayLastSigned {
@@ -1327,9 +1330,10 @@ function DontDisplayLastSigned {
 }
 
 function MachineInactivityLimit {
+    #IMPORTANT! Adjusted by Michał Chruściel to meet internal DWF requirements. Changed to 0
     #2.3.7.3 => Computer Configuration\Policies\Windows Settings\Security Settings\Local Policies\Security Options\Interactive logon: Machine inactivity limit
     Write-Info "2.3.7.3 (L1) Ensure 'Interactive logon: Machine inactivity limit' is set to '900 or fewer second(s), but not 0' "
-    SetSecurityPolicy "MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\InactivityTimeoutSecs" (,"4,900")
+    SetSecurityPolicy "MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\InactivityTimeoutSecs" (,"4,0")
 }
 
 function LogonLegalNotice {
@@ -1392,9 +1396,10 @@ function DisableSmbUnencryptedPassword {
 }
 
 function IdleTimeSuspendingSession {
+    #IMPORTANT! Adjusted by Michał Chruściel to meet internal DWF requirements. Changed to 0
     #2.3.9.1 => Computer Configuration\Policies\Windows Settings\Security Settings\Local Policies\Security Options\Microsoft network server: Amount of idle time required before suspending session
     Write-Info "2.3.9.1 (L1) Ensure 'Microsoft network server: Amount of idle time required before suspending session' is set to '15 or fewer minute(s)'"
-    SetSecurityPolicy "MACHINE\System\CurrentControlSet\Services\LanManServer\Parameters\AutoDisconnect" (,"4,15")
+    SetSecurityPolicy "MACHINE\System\CurrentControlSet\Services\LanManServer\Parameters\AutoDisconnect" (,"4,0")
 }
 
 function NetworkServerAlwaysDigitallySign {
@@ -2107,9 +2112,10 @@ function SafeDllSearchMode {
 }
 
 function ScreenSaverGracePeriod {
+    #IMPORTANT! Adjusted by Michał Chruściel to meet internal DWF requirements.
     #18.4.9 => Computer Configuration\Policies\Administrative Templates\MSS (Legacy)\MSS: (ScreenSaverGracePeriod) The time in seconds before the screen saver grace period expires (0 recommended) 
     Write-Info "18.4.9 (L1) Ensure 'MSS: (ScreenSaverGracePeriod) The time in seconds before the screen saver grace period expires (0 recommended)' is set to 'Enabled: 5 or fewer seconds'"
-    SetRegistry "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" "ScreenSaverGracePeriod" "5" $REG_DWORD
+    SetRegistry "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" "ScreenSaverGracePeriod" "0" $REG_DWORD
 }
 
 function TcpMaxDataRetransmissionsV6 {
@@ -2884,9 +2890,10 @@ function TerminalServicesMinEncryptionLevel {
 }
 
 function TerminalServicesMaxIdleTime {
+    #IMPORTANT! Adjusted by Michał Chruściel to meet internal DWF requirements.
     #18.9.65.3.10.1 => Computer Configuration\Policies\Administrative Templates\Windows Components\Remote Desktop Services\Remote Desktop Session Host\Session Time Limits\Set time limit for active but idle Remote Desktop Services sessions
     Write-Info "18.9.65.3.10.1 (L2) Ensure 'Set time limit for active but idle Remote Desktop Services sessions' is set to 'Enabled: 15 minutes or less, but not Never (0)'"
-    SetRegistry "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" "MaxIdleTime" "900000" $REG_DWORD
+    SetRegistry "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" "MaxIdleTime" "0" $REG_DWORD
 }
 
 function TerminalServicesMaxDisconnectionTime {
@@ -3188,9 +3195,10 @@ function WinRMServiceAllowBasic {
 }
 
 function WinRMServiceAllowAutoConfig {
+    #IMPORTANT! Adjusted by Michał Chruściel to meet internal DWF requirements. Changed to 1
     #18.9.102.2.2 => Computer Configuration\Administrative Templates\Windows Components\Windows Remote Management (WinRM)\WinRM Service\Allow remote server management through WinRM
     Write-Info "18.9.102.2.2 (L2) Ensure 'Allow remote server management through WinRM' is set to 'Disabled'"
-    SetRegistry "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WinRM\Service" "AllowAutoConfig" "0" $REG_DWORD
+    SetRegistry "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WinRM\Service" "AllowAutoConfig" "1" $REG_DWORD
 }
 
 function WinRMServiceAllowUnencryptedTraffic {
@@ -3206,9 +3214,10 @@ function WinRMServiceDisableRunAs {
 }
 
 function WinRSAllowRemoteShellAccess {
+    #IMPORTANT! Adjusted by Michał Chruściel to meet internal DWF requirements. Changed to 1
     #18.9.103.1 => Computer Configuration\Administrative Templates\Windows Components\Windows Remote Shell\Allow Remote Shell Access
     Write-Info "18.9.103.1 (L2) Ensure 'Allow Remote Shell Access' is set to 'Disabled'"
-    SetRegistry "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WinRM\Service\WinRS" "AllowRemoteShellAccess" "0" $REG_DWORD
+    SetRegistry "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WinRM\Service\WinRS" "AllowRemoteShellAccess" "1" $REG_DWORD
 }
 
 function DisallowExploitProtectionOverride {
@@ -3287,26 +3296,26 @@ $temp_pass2 = ""
 $invalid_pass = $true
 
 # Get input password if the admin account does not already exist
-$NewLocalAdminExists = Get-LocalUser -Name $NewLocalAdmin -ErrorAction SilentlyContinue
-if ($NewLocalAdminExists.Count -eq 0) {
-    do {
-        Write-Info "I will create a new Administrator account, you need to specify the new account password."
-        Write-Info "Your password must contain at least 15 characters, capital letters, numbers and symbols"
-        
-        Write-Info "Please enter the new password:"
-        $temp_pass1 = "Password1234!#!#!"
-        Write-Info "Please repeat the new password:"
-        $temp_pass2 = "Password1234!#!#!" 
-        
-        $invalid_pass = ValidatePasswords $temp_pass1 $temp_pass2 
-        if($invalid_pass -eq $false) {
-            Write-Error "Your passwords do not match or do not follow the minimum complexity requirements, try again."
-        } 
-        else {
-            $NewLocalAdminPassword = ConvertTo-SecureString $temp_pass1 -AsPlainText -Force 
-        }
-    } while($invalid_pass -eq $false)
-}
+#$NewLocalAdminExists = Get-LocalUser -Name $NewLocalAdmin -ErrorAction SilentlyContinue
+#if ($NewLocalAdminExists.Count -eq 0) {
+#    do {
+#        Write-Info "I will create a new Administrator account, you need to specify the new account password."
+#        Write-Info "Your password must contain at least 15 characters, capital letters, numbers and symbols"
+#        
+#        Write-Info "Please enter the new password:"
+#        $temp_pass1 = Read-Host
+#        Write-Info "Please repeat the new password:"
+#        $temp_pass2 = Read-Host 
+#        
+#        $invalid_pass = ValidatePasswords $temp_pass1 $temp_pass2 
+#        if($invalid_pass -eq $false) {
+#            Write-Error "Your passwords do not match or do not follow the minimum complexity requirements, try again."
+#        } 
+#        else {
+#            $NewLocalAdminPassword = ConvertTo-SecureString $temp_pass1 -AsPlainText -Force 
+#        }
+#    } while($invalid_pass -eq $false)
+#}
 
 $location = Get-Location
     
